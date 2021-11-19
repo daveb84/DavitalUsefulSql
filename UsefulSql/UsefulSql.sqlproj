@@ -71,6 +71,7 @@
     <Compile Include="Clr\GetFileContents.cs" />
     <Compile Include="Clr\GetUnicodeValues.cs" />
     <Compile Include="Clr\ReplaceUnicodeValues.cs" />
+    <Compile Include="Clr\Regex.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="UsefulSql.publish.xml" />
