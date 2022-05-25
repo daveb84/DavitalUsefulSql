@@ -72,10 +72,12 @@
     <Compile Include="Clr\GetUnicodeValues.cs" />
     <Compile Include="Clr\ReplaceUnicodeValues.cs" />
     <Compile Include="Clr\Regex.cs" />
+    <Compile Include="Clr\GetXPathValue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="UsefulSql.publish.xml" />
     <None Include="AdHoc\SqlClr.sql" />
+    <None Include="AdHoc\Test.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment1.sql" />
