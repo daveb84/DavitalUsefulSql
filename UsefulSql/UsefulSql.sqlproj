@@ -72,7 +72,7 @@
     <Compile Include="Clr\GetUnicodeValues.cs" />
     <Compile Include="Clr\ReplaceUnicodeValues.cs" />
     <Compile Include="Clr\Regex.cs" />
-    <Compile Include="Clr\GetXPathValue.cs" />
+    <Compile Include="Clr\XPath.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="UsefulSql.publish.xml" />

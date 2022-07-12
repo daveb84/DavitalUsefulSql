@@ -22,4 +22,25 @@ public partial class UserDefinedFunctions
 
         return new SqlString(node.Value);
     }
+
+    [SqlFunction(DataAccess = DataAccessKind.None,
+        TableDefinition = "Value NVARCHAR(MAX)",
+        FillRowMethodName = "GetXPathValuesRow")]
+    public static IEnumerable GetXPathValues(SqlString xml, SqlString xpath)
+    {
+        var xmlDoc = new XmlDocument();
+        xmlDoc.LoadXml(xml.Value);
+
+        var nodes = xmlDoc.SelectNodes(xpath.Value);
+
+        foreach (XmlNode node in nodes)
+        {
+            yield return node.Value;
+        }
+    }
+
+    public static void GetXPathValuesRow(object result, out SqlString value)
+    {
+        value = result as string;
+    }
 }

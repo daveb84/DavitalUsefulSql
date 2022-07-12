@@ -69,9 +69,28 @@ SELECT *
 FROM 
 	UsefulSql.dbo.RegexGetMatch('Gets first match only', '\b(\w+)\b', NULL)
 ```
+
 **dbo.RegexIsMatch**  
 Wrapper around [Regex.IsMatch](https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex.ismatch?view=net-6.0). Scalar function, returning a BIT indicating if the expression matches.
 
 ```SQL
 SELECT UsefulSql.dbo.RegexIsMatch('Returns 1 or 0', '\b(\w+)\b', NULL)
+```
+
+### XML functions
+
+**dbo.GetXPathValue**  
+Returns the first matching result of an XPath expression for the given XML.
+
+```SQL
+SELECT UsefulSql.dbo.GetXPathValue('<root><item key="1" value="AAA" /></root>', '//root/item[@key="1"]/@value')
+```
+
+**dbo.GetXPathValues**  
+Returns all matching results of an XPath expression for the given XML.
+
+```SQL
+SELECT *
+FROM
+	UsefulSql.dbo.GetXPathValues('<root><item key="1" value="AAA" /><item key="2" value="BBB" /></root>', '//root/item/@value')
 ```

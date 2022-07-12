@@ -5,7 +5,13 @@ VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "UsefulSql", "UsefulSql\UsefulSql.sqlproj", "{6A3E7EFE-8F90-475A-B4F2-CD674857850B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DavitalUsefulSql.Tests", "DavitalUsefulSql.Tests\DavitalUsefulSql.Tests.csproj", "{37D39D4F-082D-4BFF-AA29-E41C7C76383E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DavitalUsefulSql.Tests", "DavitalUsefulSql.Tests\DavitalUsefulSql.Tests.csproj", "{37D39D4F-082D-4BFF-AA29-E41C7C76383E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4623110F-6AAE-480B-9E23-2B0F10DBCE8B}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
