@@ -77,7 +77,6 @@
   <ItemGroup>
     <None Include="UsefulSql.publish.xml" />
     <None Include="AdHoc\SqlClr.sql" />
-    <None Include="AdHoc\Test.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment1.sql" />
