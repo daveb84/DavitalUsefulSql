@@ -7,7 +7,6 @@ namespace DavitalUsefulSql.Tests
     {
         public static IEnumerable<object[]> GetXPathTestCases
         {
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             get
             {
                 yield return new object[] 
@@ -30,7 +29,6 @@ namespace DavitalUsefulSql.Tests
                     @"//root/elm[@key=""no match""]/@value",
                     null
                 };
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
             }
         }
 
