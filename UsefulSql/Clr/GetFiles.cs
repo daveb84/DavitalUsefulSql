@@ -7,7 +7,7 @@ using Microsoft.SqlServer.Server;
 public partial class UserDefinedFunctions
 {
     [SqlFunction(DataAccess = DataAccessKind.None,
-        TableDefinition = "FullName NVARCHAR(2000), Name NVARCHAR(255), Extension NVARCHAR(20), IsDirectory BIT, Depth INT",
+        TableDefinition = "FullName NVARCHAR(2000), Name NVARCHAR(255), Directory NVARCHAR(2000), Extension NVARCHAR(20), IsDirectory BIT, Depth INT",
         FillRowMethodName = "GetFilesFillRow")]
     public static IEnumerable GetFiles(SqlString directory)
     {
@@ -25,13 +25,13 @@ public partial class UserDefinedFunctions
     {
         foreach (var file in directory.GetFiles())
         {
-            yield return new FileResult { Result = file, Depth = depth };
+            yield return new FileResult(directory, file, depth);
         }
 
         var childDepth = depth + 1;
         foreach(var child in directory.GetDirectories())
         {
-            yield return new FileResult { Result = child, Depth = depth };
+            yield return new FileResult(directory, child, depth);
 
             var children = GetChildren(child, childDepth);
 
@@ -44,17 +44,25 @@ public partial class UserDefinedFunctions
 
     public class FileResult
     {
-        public FileSystemInfo Result { get; set; }
+        public FileResult(DirectoryInfo directory, FileSystemInfo result, int depth)
+        {
+            this.Directory = directory;
+            this.Result = result;
+            this.Depth = depth;
+        }
 
-        public int Depth { get; set; }
+        public DirectoryInfo Directory { get; }
+        public FileSystemInfo Result { get; }
+        public int Depth { get; }
     }
 
-    public static void GetFilesFillRow(object result, out SqlString fullName, out SqlString name, out SqlString extension, out SqlBoolean isDirectory, out SqlInt32 depth)
+    public static void GetFilesFillRow(object result, out SqlString fullName, out SqlString name, out SqlString directory, out SqlString extension, out SqlBoolean isDirectory, out SqlInt32 depth)
     {
         var entry = (FileResult)result;
         var file = entry.Result;
 
         fullName = file.FullName;
+        directory = entry.Directory.FullName;
         name = file.Name;
         extension = file.Extension;
         isDirectory = file is DirectoryInfo;
