@@ -77,6 +77,20 @@ Wrapper around [Regex.IsMatch](https://docs.microsoft.com/en-us/dotnet/api/syste
 SELECT UsefulSql.dbo.RegexIsMatch('Returns 1 or 0', '\b(\w+)\b', NULL)
 ```
 
+**dbo.RegexGetGroups**  
+Returns the values of groups defined in the regular expression.
+
+```SQL
+SELECT * 
+FROM 
+	UsefulSql.dbo.RegexGetGroups('Dogs:20;Cats:10', '^Dogs\:?(?<Dogs>\d+);Cats\:?(?<Cats>\d+)$', NULL)
+```
+
+```SQL
+SELECT * 
+FROM 
+	UsefulSql.dbo.RegexGetMatch('Gets first match only', '\b(\w+)\b', NULL)
+
 ### XML functions
 
 **dbo.GetXPathValue**  

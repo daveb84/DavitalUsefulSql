@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
@@ -42,14 +43,7 @@ public partial class UserDefinedFunctions
     {
         var regex = GetRegex(pattern, regexOptions);
 
-        var matchResults = new List<object>();
-
         var matches = regex.Matches(value.Value);
-
-        foreach (var match in matches)
-        {
-            matchResults.Add(match);
-        }
 
         return matches;
     }
@@ -60,6 +54,40 @@ public partial class UserDefinedFunctions
 
         value = match.Value;
         position = match.Index;
+    }
+
+    [SqlFunction(DataAccess = DataAccessKind.None,
+        TableDefinition = "MatchValue NVARCHAR(MAX), MatchPosition INT, GroupName NVARCHAR(MAX), GroupValue NVARCHAR(MAX), GroupPosition INT",
+        FillRowMethodName = "RegexGetGroupsRow")]
+    public static IEnumerable RegexGetGroups(SqlString value, SqlString pattern, SqlInt32 regexOptions)
+    {
+        var regex = GetRegex(pattern, regexOptions);
+
+        var matchResults = new List<object>();
+
+        var matches = regex.Matches(value.Value);
+
+        foreach (Match match in matches)
+        {
+            foreach (Group group in match.Groups)
+            {
+                matchResults.Add(new Tuple<Match, Group>(match, group));
+            }
+        }
+
+        return matchResults;
+    }
+
+    public static void RegexGetGroupsRow(object result, out SqlString matchValue, out SqlInt32 matchPosition, out SqlString groupName, out SqlString groupValue, out SqlInt32 groupPosition)
+    {
+        var resultMatch = (Tuple<Match, Group>)result;
+        var match = resultMatch.Item1;
+        RegexGetMatchesRow(match, out matchValue, out matchPosition);
+
+        var group = resultMatch.Item2;
+        groupName = group.Name;
+        groupValue = group.Value;
+        groupPosition = group.Index;
     }
 
     private static Regex GetRegex(SqlString pattern, SqlInt32 regexOptions)
