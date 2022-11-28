@@ -22,7 +22,7 @@ SELECT * FROM UsefulSql.dbo.GetFiles('c:\myfolder')
 **dbo.GetFileContents**  
 Returns the contents of a file
 ```SQL
-SELECT UsefulSql.dbo.GetFileContent('c:\myfolder\myfile.txt')
+SELECT UsefulSql.dbo.GetFileContents('c:\myfolder\myfile.txt')
 ```
 
 ### Character encoding functions
