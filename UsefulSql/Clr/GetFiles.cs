@@ -7,7 +7,7 @@ using Microsoft.SqlServer.Server;
 public partial class UserDefinedFunctions
 {
     [SqlFunction(DataAccess = DataAccessKind.None,
-        TableDefinition = "FullName NVARCHAR(2000), Name NVARCHAR(255), Directory NVARCHAR(2000), Extension NVARCHAR(20), IsDirectory BIT, Depth INT",
+        TableDefinition = "FullName NVARCHAR(2000), Name NVARCHAR(255), Directory NVARCHAR(2000), Extension NVARCHAR(20), IsDirectory BIT, Depth INT, Size BIGINT",
         FillRowMethodName = "GetFilesFillRow")]
     public static IEnumerable GetFiles(SqlString directory)
     {
@@ -56,7 +56,7 @@ public partial class UserDefinedFunctions
         public int Depth { get; }
     }
 
-    public static void GetFilesFillRow(object result, out SqlString fullName, out SqlString name, out SqlString directory, out SqlString extension, out SqlBoolean isDirectory, out SqlInt32 depth)
+    public static void GetFilesFillRow(object result, out SqlString fullName, out SqlString name, out SqlString directory, out SqlString extension, out SqlBoolean isDirectory, out SqlInt32 depth, out SqlInt64 size)
     {
         var entry = (FileResult)result;
         var file = entry.Result;
@@ -67,5 +67,6 @@ public partial class UserDefinedFunctions
         extension = file.Extension;
         isDirectory = file is DirectoryInfo;
         depth = entry.Depth;
+        size = (file as FileInfo)?.Length ?? 0;
     }
 }
