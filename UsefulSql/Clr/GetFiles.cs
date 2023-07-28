@@ -7,7 +7,7 @@ using Microsoft.SqlServer.Server;
 public partial class UserDefinedFunctions
 {
     [SqlFunction(DataAccess = DataAccessKind.None,
-        TableDefinition = "FullName NVARCHAR(2000), Name NVARCHAR(255), Directory NVARCHAR(2000), Extension NVARCHAR(20), IsDirectory BIT, Depth INT, Size BIGINT",
+        TableDefinition = "FullName NVARCHAR(2000), Name NVARCHAR(255), Directory NVARCHAR(2000), Extension NVARCHAR(255), IsDirectory BIT, Depth INT, Size BIGINT",
         FillRowMethodName = "GetFilesFillRow")]
     public static IEnumerable GetFiles(SqlString directory)
     {
