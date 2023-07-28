@@ -1,4 +1,4 @@
-# DavitalUsefulSql
+# Davital Useful SQL
 A SQL Server Database project with some useful SQL CLR functions.  Requires Visual Studio with SQL Server 
 Data Tools (SSDT) installed.
 
@@ -8,7 +8,7 @@ Data Tools (SSDT) installed.
 Run on SQL Server instance to enable SQL CLR
 
 **UsefulSql.publish.xml**  
-Publishes a database called `UsefulSql` to SQL Instance `localhost\SQLEXPRESS`
+Publishes a database called `UsefulSql` to SQL Instance `localhost`
 
 ## Functions
 
@@ -90,6 +90,7 @@ FROM
 SELECT * 
 FROM 
 	UsefulSql.dbo.RegexGetMatch('Gets first match only', '\b(\w+)\b', NULL)
+```
 
 ### XML functions
 
