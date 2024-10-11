@@ -109,3 +109,15 @@ SELECT *
 FROM
 	UsefulSql.dbo.GetXPathValues('<root><item key="1" value="AAA" /><item key="2" value="BBB" /></root>', '//root/item/@value')
 ```
+
+### Text functions
+
+**dbo.GetTextLines**  
+Splits a string into lines.  Supports Windows (\r\n) or Unix (\n) line endings.
+
+```SQL
+DECLARE @Text = 'Line 1
+Line2'
+
+SELECT UsefulSql.dbo.GetTextLines(@Text)
+```
